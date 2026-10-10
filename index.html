@@ -1,0 +1,306 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>VÉRTICE — Supra MK4</title>
+<style>
+:root{--paint:#c51e2c;--glow:#d9ff50}
+*{box-sizing:border-box}
+body{margin:0;background:#080b10;color:#f5f7fb;font-family:Arial,Helvetica,sans-serif}
+header{padding:23px 20px 8px;font-size:26px;font-weight:900;letter-spacing:7px}
+header span{color:var(--glow)}
+.sub{padding:0 21px 20px;color:#96a3b6;font-size:11px;letter-spacing:2px}
+main{max-width:1200px;margin:auto;padding:0 12px 30px}
+.stage{
+ position:relative;height:360px;overflow:hidden;border:1px solid #283343;
+ border-radius:17px;background:radial-gradient(ellipse at 50% 53%,#273548 0%,#131b29 43%,#080b10 78%);
+}
+.stage:after{content:"";position:absolute;inset:auto 0 0;height:30%;
+ background:linear-gradient(transparent,#080b10);pointer-events:none}
+.scene{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;perspective:900px}
+.car{
+ width:min(95%,650px);height:auto;overflow:visible;
+ transform:rotateX(4deg) rotateY(-13deg);
+ transform-origin:center;
+ filter:drop-shadow(0 22px 13px #000b);
+ transition:transform .6s ease,filter .3s;
+}
+.stage.spinning .car{animation:turn 7s linear infinite}
+@keyframes turn{
+ 0%{transform:rotateX(4deg) rotateY(-13deg)}
+ 25%{transform:rotateX(1deg) rotateY(8deg)}
+ 50%{transform:rotateX(4deg) rotateY(13deg)}
+ 75%{transform:rotateX(1deg) rotateY(-8deg)}
+ 100%{transform:rotateX(4deg) rotateY(-13deg)}
+}
+.car path,.car polygon,.car ellipse,.car rect{vector-effect:non-scaling-stroke}
+.paint{fill:var(--paint);stroke:#f5a4a4;stroke-opacity:.35;stroke-width:1.5}
+.glass{fill:#111c2a;stroke:#64788c;stroke-width:2}
+.trim{fill:#11151b;stroke:#343d49;stroke-width:2}
+.rim{fill:#bfc9d3;stroke:#596573;stroke-width:3}
+.rubber{fill:#090b0e;stroke:#303944;stroke-width:3}
+.spoke{stroke:#e0e6ed;stroke-width:3;stroke-linecap:round}
+.lamp{fill:#eafaff;filter:none}
+.tail{fill:#ff273b}
+.floorline{stroke:#485a72;stroke-width:1;opacity:.28}
+.hint{position:absolute;top:14px;left:15px;color:#b3bfce;font-size:10px;letter-spacing:1.5px;z-index:2}
+.badge{position:absolute;right:14px;top:13px;color:var(--glow);font-size:10px;letter-spacing:2px;z-index:2}
+.info{padding:21px;background:#111720;border:1px solid #303d4e;border-radius:17px;margin-top:12px}
+.kicker{font-size:11px;color:var(--glow);letter-spacing:4px}
+h1{font-size:34px;margin:9px 0}
+p{color:#aab6c7;line-height:1.55;font-size:14px}
+h2{font-size:12px;letter-spacing:3px;margin:22px 0 12px}
+.colors{display:flex;gap:12px;flex-wrap:wrap}
+.swatch{width:37px;height:37px;border-radius:50%;border:3px solid #fff;cursor:pointer}
+button{color:#f2f4f8;background:#222c3b;border:1px solid #4a5a70;border-radius:10px;padding:13px 7px;font-size:13px;cursor:pointer}
+button:active{transform:scale(.98)}
+button.active{border-color:var(--glow);color:var(--glow)}
+.controls{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+input[type=range]{width:100%;accent-color:var(--glow)}
+.note{font-size:10px;color:#77869b;margin-top:18px}
+#status{font-size:12px;color:var(--glow);margin-top:10px}
+@media(min-width:800px){
+ main{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(310px,.75fr);gap:16px}
+ .stage{height:610px}
+ .info{margin-top:0}
+ .car{width:100%;max-width:700px}
+ header,.sub{max-width:1200px;margin-left:auto;margin-right:auto}
+}
+</style>
+</head>
+<body>
+<header>VÉRTICE<span>.</span></header>
+<div class="sub">INTERACTIVE GARAGE · JAPANESE LEGEND</div>
+
+<main>
+<section class="stage" id="stage">
+ <div class="hint">MODELO 3D ESTILIZADO · EXPLÓRALO</div>
+ <div class="badge">TOYOTA SUPRA · A80</div>
+ <div class="scene">
+ <svg class="car" id="car" viewBox="0 0 700 390" role="img" aria-label="Modelo ilustrado de un Toyota Supra MK4 rojo">
+ <defs>
+  <linearGradient id="bodyshine" x1="0" y1="0" x2="0.4" y2="1">
+   <stop offset="0" stop-color="#fff" stop-opacity=".48"/>
+   <stop offset=".35" stop-color="#fff" stop-opacity=".06"/>
+   <stop offset="1" stop-color="#000" stop-opacity=".5"/>
+  </linearGradient>
+  <linearGradient id="glassshine" x1="0" y1="0" x2="1" y2="1">
+   <stop stop-color="#718da7"/><stop offset=".4" stop-color="#1b2c40"/><stop offset="1" stop-color="#080d15"/>
+  </linearGradient>
+  <linearGradient id="tire" x1="0" y1="0" x2="1" y2="1">
+   <stop stop-color="#303943"/><stop offset=".45" stop-color="#080a0d"/><stop offset="1" stop-color="#252d37"/>
+  </linearGradient>
+  <linearGradient id="floorglow" x1="0" y1="0" x2="0" y2="1">
+   <stop stop-color="var(--paint)" stop-opacity=".3"/><stop offset="1" stop-color="var(--paint)" stop-opacity="0"/>
+  </linearGradient>
+ </defs>
+
+ <!-- Suelo y reflejo -->
+ <ellipse cx="350" cy="316" rx="252" ry="33" fill="#000" opacity=".7"/>
+ <path id="reflection" d="M115 284 Q350 330 584 282 L545 343 Q350 375 153 337Z" fill="url(#floorglow)"/>
+ <g opacity=".18">
+  <path class="floorline" d="M40 328H660M80 350H620M150 372H550"/>
+  <path class="floorline" d="M250 315L170 390M350 315L350 390M450 315L530 390"/>
+ </g>
+
+ <!-- Alerón -->
+ <g id="spoiler">
+  <path d="M475 139L487 101L496 101L490 148" class="trim"/>
+  <path d="M536 147L548 110L558 111L550 158" class="trim"/>
+  <path class="paint" d="M467 102Q514 90 564 108L555 119Q510 110 466 115Z"/>
+  <path d="M469 103Q517 94 559 109" stroke="#fff" stroke-opacity=".5" fill="none" stroke-width="2"/>
+ </g>
+
+ <!-- Sombra lateral del vehículo -->
+ <path d="M94 251Q110 216 157 207L238 192Q272 153 319 147L438 148Q481 153 519 190L592 216Q622 229 626 255L610 277L117 285L92 269Z" fill="#05070b"/>
+
+ <!-- Ruedas traseras y delanteras -->
+ <g>
+  <ellipse cx="209" cy="259" rx="49" ry="64" fill="#080a0e" stroke="#303944" stroke-width="5"/>
+  <ellipse cx="209" cy="259" rx="33" ry="47" fill="url(#tire)"/>
+  <ellipse cx="209" cy="259" rx="25" ry="37" fill="#b6c0cb"/>
+  <ellipse cx="209" cy="259" rx="19" ry="29" fill="#222b36"/>
+  <g transform="translate(209 259)" class="spoke">
+   <path d="M0-27V27M-19-19L19 19M19-19L-19 19M-25 0H25"/>
+  </g>
+  <ellipse cx="515" cy="253" rx="47" ry="61" fill="#080a0e" stroke="#303944" stroke-width="5"/>
+  <ellipse cx="515" cy="253" rx="32" ry="45" fill="url(#tire)"/>
+  <ellipse cx="515" cy="253" rx="24" ry="35" fill="#c2ccd6"/>
+  <ellipse cx="515" cy="253" rx="18" ry="27" fill="#222b36"/>
+  <g transform="translate(515 253)" class="spoke">
+   <path d="M0-26V26M-18-18L18 18M18-18L-18 18M-24 0H24"/>
+  </g>
+ </g>
+
+ <!-- Carrocería baja -->
+ <path class="paint" d="M87 246Q95 221 128 214L218 202L261 170Q279 153 318 148L437 150Q472 154 501 188L573 211Q606 223 624 243L621 261L582 274L105 276L82 263Z"/>
+ <path d="M92 246Q103 226 137 221L219 210L263 179Q283 160 321 157L435 158Q468 162 492 193L567 217L605 237L574 240L500 222L263 222L144 242Z" fill="url(#bodyshine)"/>
+ <path d="M103 255Q255 235 608 250L615 261L580 273L108 276L82 263Z" fill="#0c1017" opacity=".75"/>
+
+ <!-- Capó -->
+ <path class="paint" d="M254 180Q319 155 438 159Q470 166 496 196L384 205L245 207Z"/>
+ <path d="M267 181Q338 164 435 165" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2"/>
+ <path d="M284 193L399 197M423 175L463 193" fill="none" stroke="#5d121b" stroke-width="2"/>
+
+ <!-- Cabina y techo -->
+ <path class="paint" d="M231 202L264 169Q282 145 318 139L424 141Q457 147 482 180L503 199L463 198L434 163Q421 151 403 151L322 151Q294 153 280 174L258 202Z"/>
+ <path d="M276 169Q296 146 322 145L403 146Q426 147 444 166L453 180L290 180Z" fill="url(#glassshine)" stroke="#8398ad" stroke-width="2"/>
+ <path d="M321 147L311 178M404 148L420 179" stroke="#91a6bc" stroke-opacity=".6" stroke-width="3"/>
+ <path d="M290 183L455 183L475 199L271 199Z" fill="#111923" stroke="#384656" stroke-width="2"/>
+
+ <!-- Ventanas laterales -->
+ <path class="glass" d="M263 180L292 158L307 181L288 199L248 202Z" fill="url(#glassshine)"/>
+ <path class="glass" d="M315 181L304 157L400 157L417 181Z" fill="url(#glassshine)"/>
+ <path d="M314 158L326 181M401 158L414 181" stroke="#90a4b7" stroke-width="2" fill="none"/>
+
+ <!-- Puertas y líneas de carrocería -->
+ <path d="M287 205L280 244L360 248L385 206" fill="none" stroke="#66121c" stroke-width="2"/>
+ <path d="M397 207L389 245L473 245L479 213" fill="none" stroke="#74141f" stroke-width="2"/>
+ <path d="M311 218L340 218" stroke="#f1b5b5" stroke-width="3" stroke-linecap="round"/>
+ <path d="M399 216L427 216" stroke="#f1b5b5" stroke-width="3" stroke-linecap="round"/>
+
+ <!-- Retrovisores -->
+ <path d="M261 194L242 187L232 194L240 203L258 204Z" class="paint"/>
+ <path d="M466 192L485 185L496 193L489 202L473 203Z" class="paint"/>
+
+ <!-- Faros delanteros -->
+ <path d="M96 230L140 219L155 230L118 244L91 244Z" fill="#c9d6df" stroke="#4b596a" stroke-width="2"/>
+ <path d="M101 232L138 224" stroke="#fff" stroke-width="4" class="lamp"/>
+ <path d="M87 247L131 245L146 253L102 259L84 255Z" class="trim"/>
+ <path d="M103 249L130 249" stroke="#222f40" stroke-width="4"/>
+
+ <!-- Faros traseros -->
+ <path d="M552 216L588 227L607 241L576 237L550 227Z" fill="#a80c20" stroke="#450811" stroke-width="2"/>
+ <ellipse class="tail" cx="576" cy="230" rx="7" ry="5"/>
+ <ellipse class="tail" cx="592" cy="236" rx="7" ry="5"/>
+
+ <!-- Parrilla, faldones y escape -->
+ <path d="M84 257L143 259L145 268L102 270L84 263Z" fill="#080b10"/>
+ <path d="M104 271L569 270L590 263L590 272L559 281L119 281L97 273Z" fill="#151b24"/>
+ <ellipse cx="570" cy="269" rx="8" ry="5" fill="#abb4c0" stroke="#333c48" stroke-width="2"/>
+ <path d="M178 279L498 279" stroke="#a3adbb" stroke-opacity=".35" stroke-width="2"/>
+
+ <!-- Brillos de pintura -->
+ <path d="M125 219L214 208M475 197L560 222" fill="none" stroke="#fff" stroke-opacity=".48" stroke-width="3"/>
+ </svg>
+ </div>
+</section>
+
+<section class="info">
+ <div class="kicker">JAPANESE LEGEND · A80</div>
+ <h1>SUPRA MK4.</h1>
+ <p>Un homenaje al icónico deportivo japonés de los años 90. Personaliza la carrocería y explora sus detalles.</p>
+
+ <h2>COLOR</h2>
+ <div class="colors">
+  <button class="swatch" style="background:#c51e2c" aria-label="Rojo" onclick="paint('#c51e2c')"></button>
+  <button class="swatch" style="background:#111318" aria-label="Negro" onclick="paint('#111318')"></button>
+  <button class="swatch" style="background:#e5e5e5" aria-label="Blanco" onclick="paint('#e5e5e5')"></button>
+  <button class="swatch" style="background:#2457c5" aria-label="Azul" onclick="paint('#2457c5')"></button>
+  <button class="swatch" style="background:#d9ff50" aria-label="Verde lima" onclick="paint('#d9ff50')"></button>
+  <button class="swatch" style="background:#f08c31" aria-label="Naranja" onclick="paint('#f08c31')"></button>
+ </div>
+
+ <h2>CONTROLES</h2>
+ <div class="controls">
+  <button id="lights" onclick="toggleLights()">Encender faros</button>
+  <button id="spin" onclick="toggleSpin()">Giro automático</button>
+  <button onclick="view('front')">Vista delantera</button>
+  <button onclick="view('rear')">Vista trasera</button>
+  <button id="wing" onclick="toggleWing()">Quitar alerón</button>
+  <button id="mirror" onclick="toggleMirror()">Suelo espejo</button>
+  <button onclick="view('side')">Vista lateral</button>
+  <button onclick="resetCar()">Restablecer</button>
+ </div>
+
+ <h2>ILUMINACIÓN</h2>
+ <input id="lightlevel" type="range" min="0.4" max="1.8" step="0.1" value="1" aria-label="Iluminación">
+ <div id="status">● Modelo cargado correctamente</div>
+ <div class="note">Ilustración interactiva estilizada inspirada en el Toyota Supra MK4. No es un escaneo exacto ni un modelo CAD.</div>
+</section>
+</main>
+
+<script>
+const root=document.documentElement;
+const stage=document.getElementById('stage');
+const car=document.getElementById('car');
+let spinning=false,lights=false,wing=true,mirror=true;
+let angle=-13,brightness=1;
+function paint(color){
+ root.style.setProperty('--paint',color);
+ document.getElementById('status').textContent='● Color actualizado';
+}
+function toggleSpin(){
+ spinning=!spinning;
+ stage.classList.toggle('spinning',spinning);
+ document.getElementById('spin').classList.toggle('active',spinning);
+ if(!spinning)car.style.transform=`rotateX(4deg) rotateY(${angle}deg)`;
+}
+function toggleLights(){
+ lights=!lights;
+ document.getElementById('lights').textContent=lights?'Apagar faros':'Encender faros';
+ document.getElementById('lights').classList.toggle('active',lights);
+ car.querySelectorAll('.lamp').forEach(x=>{
+  x.style.filter=lights?'drop-shadow(0 0 9px white)':'none';
+ });
+ car.querySelectorAll('.tail').forEach(x=>{
+  x.style.filter=lights?'drop-shadow(0 0 8px #ff142d)':'none';
+ });
+ document.getElementById('status').textContent=lights?'● Iluminación activada':'● Iluminación normal';
+}
+function toggleWing(){
+ wing=!wing;
+ document.getElementById('spoiler').style.display=wing?'':'none';
+ document.getElementById('wing').textContent=wing?'Quitar alerón':'Poner alerón';
+}
+function toggleMirror(){
+ mirror=!mirror;
+ document.getElementById('reflection').style.display=mirror?'':'none';
+ document.getElementById('mirror').textContent=mirror?'Suelo espejo':'Activar reflejo';
+}
+function view(v){
+ spinning=false;
+ stage.classList.remove('spinning');
+ document.getElementById('spin').classList.remove('active');
+ if(v==='front')angle=0;
+ if(v==='rear')angle=180;
+ if(v==='side')angle=-70;
+ car.style.transform=`rotateX(4deg) rotateY(${angle}deg)`;
+ document.getElementById('status').textContent='● Vista: '+(v==='front'?'delantera':v==='rear'?'trasera':'lateral');
+}
+function resetCar(){
+ spinning=false;lights=false;wing=true;mirror=true;angle=-13;
+ stage.classList.remove('spinning');
+ car.style.transform='rotateX(4deg) rotateY(-13deg)';
+ document.getElementById('spoiler').style.display='';
+ document.getElementById('reflection').style.display='';
+ document.getElementById('lights').textContent='Encender faros';
+ document.getElementById('spin').classList.remove('active');
+ document.getElementById('lights').classList.remove('active');
+ document.getElementById('wing').textContent='Quitar alerón';
+ document.getElementById('mirror').textContent='Suelo espejo';
+ document.getElementById('status').textContent='● Vista restablecida';
+}
+document.getElementById('lightlevel').addEventListener('input',e=>{
+ brightness=Number(e.target.value);
+ stage.style.filter=`brightness(${brightness})`;
+});
+/* Permite girar el modelo arrastrando con el dedo o ratón */
+let dragging=false,startX=0,startAngle=angle;
+stage.addEventListener('pointerdown',e=>{
+ if(e.target.closest('button'))return;
+ dragging=true;startX=e.clientX;startAngle=angle;
+ stage.setPointerCapture(e.pointerId);
+});
+stage.addEventListener('pointermove',e=>{
+ if(!dragging||spinning)return;
+ angle=startAngle+(e.clientX-startX)*0.65;
+ car.style.transform=`rotateX(4deg) rotateY(${angle}deg)`;
+});
+stage.addEventListener('pointerup',()=>dragging=false);
+stage.addEventListener('pointercancel',()=>dragging=false);
+</script>
+</body>
+</html>
