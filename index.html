@@ -1,0 +1,280 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VERTICE | Supercar Experience</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#080b10;color:white;font-family:Arial,sans-serif;overflow:hidden}
+header{position:absolute;top:0;left:0;width:100%;padding:22px;z-index:2;letter-spacing:5px;font-weight:bold}
+header span{color:#d9ff43}
+#scene{width:100vw;height:100vh;display:block}
+.panel{position:absolute;right:20px;top:85px;width:230px;padding:20px;background:#111923eF;border:1px solid #39434e;border-radius:18px}
+h2{font-size:13px;letter-spacing:2px}
+p{font-size:12px;color:#aab5c4;line-height:1.6}
+.colors{display:flex;gap:12px;margin:18px 0}
+.color{width:30px;height:30px;border-radius:50%;border:2px solid white;cursor:pointer}
+button{background:#202a35;color:white;border:1px solid #526070;padding:11px;border-radius:9px;cursor:pointer}
+button:hover{border-color:#d9ff43}
+.buttons{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+input{width:100%;accent-color:#d9ff43}
+h1{font-size:35px;margin:5px 0}
+#status{font-size:11px;color:#d9ff43}
+.bottom{position:absolute;bottom:22px;left:22px;color:#b4bdc9;font-size:11px}
+@media(max-width:600px){
+ .panel{top:auto;bottom:48px;right:12px;width:190px;padding:13px}
+ header{padding:15px}
+ h1{font-size:28px}
+ .bottom{top:65px;bottom:auto;left:15px}
+}
+</style>
+</head>
+<body>
+<header>VÉRTICE<span>.</span></header>
+<canvas id="scene"></canvas>
+<div class="bottom">
+ ARRASTRA PARA GIRAR · USA DOS DEDOS O LA RUEDA PARA ZOOM
+</div>
+<div class="panel">
+ <p id="status">● CONFIGURADOR 3D ACTIVO</p>
+ <h1>Born to move.</h1>
+ <p>Explora este superdeportivo conceptual y personaliza su acabado.</p>
+ <h2>COLOR EXTERIOR</h2>
+ <div class="colors">
+  <button class="color" style="background:#d9ff43" onclick="paint('#d9ff43')"></button>
+  <button class="color" style="background:#15191f" onclick="paint('#15191f')"></button>
+  <button class="color" style="background:#c52535" onclick="paint('#c52535')"></button>
+  <button class="color" style="background:#e5eaf0" onclick="paint('#e5eaf0')"></button>
+  <button class="color" style="background:#145be0" onclick="paint('#145be0')"></button>
+ </div>
+ <h2>CONTROLES</h2>
+ <div class="buttons">
+  <button onclick="toggleLights()">Luces</button>
+  <button onclick="spin=!spin">Giro automático</button>
+  <button onclick="resetView()">Reiniciar vista</button>
+  <button onclick="toggleFloor()">Piso espejo</button>
+ </div>
+ <h2>ILUMINACIÓN</h2>
+ <input type="range" min="0.5" max="2.5" step=".1" value="1.5" oninput="brightness=+this.value">
+ <p>Concept car · Modelo 3D interactivo</p>
+</div>
+
+<script type="importmap">
+{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import {OrbitControls} from 'three/addons/controls/OrbitControls.js';
+
+const canvas=document.querySelector('#scene');
+const scene=new THREE.Scene();
+scene.background=new THREE.Color('#0b1018');
+scene.fog=new THREE.Fog('#0b1018',18,45);
+
+const camera=new THREE.PerspectiveCamera(38,innerWidth/innerHeight,.1,100);
+camera.position.set(7,4.2,8);
+
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true});
+renderer.setSize(innerWidth,innerHeight);
+renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+renderer.outputColorSpace=THREE.SRGBColorSpace;
+renderer.toneMapping=THREE.ACESFilmicToneMapping;
+renderer.toneMappingExposure=1.2;
+renderer.shadowMap.enabled=true;
+
+const controls=new OrbitControls(camera,renderer.domElement);
+controls.target.set(0,.8,0);
+controls.enableDamping=true;
+controls.minDistance=4;
+controls.maxDistance=17;
+controls.maxPolarAngle=Math.PI/2.05;
+
+scene.add(new THREE.HemisphereLight(0xdceaff,0x252a35,2.3));
+
+const key=new THREE.DirectionalLight(0xffffff,4);
+key.position.set(4,9,6);
+key.castShadow=true;
+scene.add(key);
+
+const rim=new THREE.PointLight(0x6c91ff,65,20);
+rim.position.set(-5,4,-4);
+scene.add(rim);
+
+const glow=new THREE.PointLight(0xd9ff43,35,15);
+glow.position.set(2,2,4);
+scene.add(glow);
+
+const floorMat=new THREE.MeshStandardMaterial({
+ color:0x171d26,metalness:.75,roughness:.25
+});
+const floor=new THREE.Mesh(new THREE.PlaneGeometry(200,200),floorMat);
+floor.rotation.x=-Math.PI/2;
+floor.position.y=-.04;
+floor.receiveShadow=true;
+scene.add(floor);
+
+const platform=new THREE.Mesh(
+ new THREE.CylinderGeometry(4.3,4.3,.12,80),
+ new THREE.MeshStandardMaterial({color:0x252c35,metalness:.7,roughness:.25})
+);
+platform.position.y=.02;
+platform.receiveShadow=true;
+scene.add(platform);
+
+const ring=new THREE.Mesh(
+ new THREE.TorusGeometry(4.15,.018,8,120),
+ new THREE.MeshBasicMaterial({color:0xd9ff43})
+);
+ring.rotation.x=Math.PI/2;
+ring.position.y=.09;
+scene.add(ring);
+
+const car=new THREE.Group();
+scene.add(car);
+
+const paintMat=new THREE.MeshPhysicalMaterial({
+ color:0xd9ff43,metalness:.75,roughness:.19,
+ clearcoat:1,clearcoatRoughness:.1
+});
+const glassMat=new THREE.MeshPhysicalMaterial({
+ color:0x101a27,metalness:.55,roughness:.12,
+ clearcoat:1
+});
+const blackMat=new THREE.MeshStandardMaterial({
+ color:0x090b0e,metalness:.4,roughness:.3
+});
+const metalMat=new THREE.MeshStandardMaterial({
+ color:0xaeb8c5,metalness:.95,roughness:.19
+});
+const lampMat=new THREE.MeshStandardMaterial({
+ color:0xffffff,emissive:0x8bbcff,emissiveIntensity:2
+});
+
+function part(geometry,material,x,y,z,group=car){
+ const m=new THREE.Mesh(geometry,material);
+ m.position.set(x,y,z);
+ m.castShadow=true;
+ m.receiveShadow=true;
+ group.add(m);
+ return m;
+}
+
+// Esculpido general de la carrocería
+part(new THREE.BoxGeometry(4.5,.55,1.85),paintMat,0,.67,0);
+part(new THREE.BoxGeometry(1.4,.22,1.82),paintMat,1.43,.99,0);
+part(new THREE.BoxGeometry(1.25,.20,1.8),paintMat,-1.57,.89,0);
+
+// Cabina panorámica
+const cabin=part(new THREE.BoxGeometry(2.05,.67,1.48),glassMat,-.34,1.17,0);
+cabin.rotation.z=-.10;
+
+const roof=part(new THREE.BoxGeometry(1.15,.10,1.49),paintMat,-.38,1.53,0);
+roof.rotation.z=-.08;
+
+// Alerón deportivo
+part(new THREE.BoxGeometry(.16,.38,.12),blackMat,-1.82,1.05,-.65);
+part(new THREE.BoxGeometry(.16,.38,.12),blackMat,-1.82,1.05,.65);
+part(new THREE.BoxGeometry(.55,.07,1.7),blackMat,-1.9,1.26,0);
+
+// Ruedas, neumáticos y llantas
+for(const x of [-1.42,1.42]){
+ for(const z of [-.96,.96]){
+  const tire=part(new THREE.CylinderGeometry(.43,.43,.27,48),blackMat,x,.46,z);
+  tire.rotation.x=Math.PI/2;
+
+  const rim=part(new THREE.CylinderGeometry(.29,.29,.29,12),metalMat,x,.46,z*1.015);
+  rim.rotation.x=Math.PI/2;
+
+  const hub=part(new THREE.CylinderGeometry(.09,.09,.31,24),blackMat,x,.46,z*1.02);
+  hub.rotation.x=Math.PI/2;
+
+  for(let i=0;i<10;i++){
+   const a=i*Math.PI/5;
+   const spoke=part(new THREE.BoxGeometry(.035,.39,.035),metalMat,x,.46,z*1.025);
+   spoke.rotation.set(a,0,Math.PI/2);
+  }
+ }
+}
+
+// Faros delanteros y luces traseras
+const headlights=[];
+for(const z of [-.59,.59]){
+ const h=part(new THREE.BoxGeometry(.12,.075,.45),lampMat,2.19,.82,z);
+ headlights.push(h);
+ part(new THREE.BoxGeometry(.08,.09,.43),
+  new THREE.MeshBasicMaterial({color:0xff142e}),-2.19,.81,z);
+}
+
+// Difusores y faldones
+part(new THREE.BoxGeometry(.4,.08,1.7),blackMat,2.02,.39,0);
+part(new THREE.BoxGeometry(.48,.12,1.6),blackMat,-2.02,.39,0);
+for(const z of [-.79,.79]){
+ part(new THREE.BoxGeometry(3.2,.12,.09),blackMat,0,.39,z);
+}
+
+// Detalles laterales
+for(const z of [-.94,.94]){
+ part(new THREE.BoxGeometry(.6,.10,.04),metalMat,-.1,.75,z);
+ part(new THREE.BoxGeometry(.22,.12,.12),blackMat,.55,.85,z);
+}
+
+// Animación de ruedas
+let wheels=[];
+car.traverse(o=>{
+ if(o.isMesh && o.geometry.type==='CylinderGeometry' &&
+ o.geometry.parameters.radiusTop===.43) wheels.push(o);
+});
+
+let spin=false,lights=false,mirror=true,brightness=1.5;
+
+window.paint=function(color){
+ paintMat.color.set(color);
+ document.querySelector('#status').textContent='● COLOR PERSONALIZADO';
+};
+
+window.toggleLights=function(){
+ lights=!lights;
+ headlights.forEach(h=>{
+  h.material.emissive.set(lights?0xffffff:0x8bbcff);
+  h.material.emissiveIntensity=lights?4:2;
+ });
+ glow.intensity=lights?100:35;
+ document.querySelector('#status').textContent=lights?'● LUCES ENCENDIDAS':'● LUCES APAGADAS';
+};
+
+window.toggleFloor=function(){
+ mirror=!mirror;
+ floorMat.roughness=mirror?.12:.7;
+ floorMat.metalness=mirror?.95:.2;
+};
+
+window.resetView=function(){
+ camera.position.set(7,4.2,8);
+ controls.target.set(0,.8,0);
+ car.rotation.y=0;
+ controls.update();
+};
+
+const clock=new THREE.Clock();
+function animate(){
+ requestAnimationFrame(animate);
+ const dt=clock.getDelta();
+ if(spin)car.rotation.y+=dt*.4;
+ wheels.forEach(w=>{if(spin)w.rotation.z+=dt*2});
+ renderer.toneMappingExposure=brightness;
+ key.intensity=brightness*2.7;
+ controls.update();
+ renderer.render(scene,camera);
+}
+animate();
+
+window.addEventListener('resize',()=>{
+ camera.aspect=innerWidth/innerHeight;
+ camera.updateProjectionMatrix();
+ renderer.setSize(innerWidth,innerHeight);
+});
+</script>
+</body>
+</html>
