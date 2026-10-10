@@ -1,0 +1,403 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toyota Supra MK4 | Vértice Garage</title>
+<style>
+:root{--paint:#aabca0;--rim:#b78350;--glow:#d8ff72}
+*{box-sizing:border-box}
+body{margin:0;background:#090c0b;color:#f5f5ef;font-family:Arial,sans-serif}
+header{padding:23px 20px;border-bottom:1px solid #29312b;letter-spacing:5px;font-weight:bold;font-size:22px}
+header span{color:var(--glow)}
+main{max-width:1100px;margin:auto;padding:22px 16px}
+.kicker{font-size:10px;letter-spacing:4px;color:var(--glow)}
+h1{font-size:clamp(38px,8vw,70px);line-height:.92;letter-spacing:-3px;margin:15px 0}
+h1 span{color:var(--paint)}
+p{color:#a7b0a7;line-height:1.65}
+.viewer{border:1px solid #3b463d;border-radius:16px;overflow:hidden;background:radial-gradient(ellipse,#303b32,#121713 70%);margin-top:22px}
+.bar{padding:15px;display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid #364036;color:#c0cabe;font-size:10px;letter-spacing:2px}
+.stage{padding:10px 0;min-height:245px;display:flex;align-items:center}
+svg{width:100%;height:auto;display:block;overflow:visible}
+.paint{fill:var(--paint);stroke:#63735d;stroke-width:2}
+.glass{fill:#1b292a;stroke:#8d9d8c;stroke-width:2}
+.dark{fill:#101411;stroke:#414b41;stroke-width:2}
+.rubber{fill:#080a09;stroke:#424940;stroke-width:4}
+.rim{fill:var(--rim);stroke:#e0bc8e;stroke-width:2}
+.spoke{stroke:#46382a;stroke-width:5;stroke-linecap:round}
+.shine{fill:none;stroke:#f0f3d8;stroke-width:2;opacity:.65}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:12px 0 20px}
+button{cursor:pointer;color:#eef0e9;background:#202720;border:1px solid #424d42;border-radius:9px;padding:13px 5px;font-size:12px}
+button.active{background:var(--glow);color:#10150d;border-color:var(--glow)}
+.panel{padding:19px;border:1px solid #343e35;border-radius:15px;background:#121713}
+h2{font-size:11px;letter-spacing:3px;color:#c2ccbd;margin:24px 0 13px}
+h2:first-child{margin-top:0}
+.colors{display:flex;gap:13px;flex-wrap:wrap}
+.swatch{height:34px;width:34px;padding:0;border-radius:50%;border:3px solid #ddd}
+.swatch.active{outline:2px solid var(--glow);outline-offset:3px}
+.controls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.specs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:17px}
+.spec{padding:13px;background:#202720;border-radius:8px}
+.spec b{display:block;margin-bottom:5px}
+.spec small{font-size:10px;color:#a0ab9e;letter-spacing:1px}
+#status{font-size:11px;color:var(--glow);margin-top:18px}
+.note{font-size:11px;color:#899488}
+footer{text-align:center;padding:25px;color:#677367;font-size:10px;letter-spacing:3px}
+@media(min-width:800px){
+ main{padding:35px 24px}
+ .layout{display:grid;grid-template-columns:1.65fr .8fr;gap:18px;align-items:start}
+ .stage{min-height:400px}
+ .panel{padding:24px}
+}
+</style>
+</head>
+<body>
+<header>VÉRTICE<span>.</span></header>
+<main>
+ <div class="kicker">JAPANESE PERFORMANCE · CUSTOM BUILD</div>
+ <h1>TOYOTA SUPRA<br><span>MK4 / A80.</span></h1>
+ <p>Un homenaje al Supra de los 90 inspirado en tu referencia: verde salvia, rines bronce, carrocería widebody, frente agresivo y alerón GT.</p>
+
+ <div class="layout">
+ <section>
+  <div class="viewer">
+   <div class="bar"><span>SUPRA A80 / EXPLORADOR</span><span id="counter">01 / 04</span></div>
+   <div class="stage">
+    <!-- VISTA LATERAL -->
+    <svg id="v-side" viewBox="0 0 800 430" aria-label="Supra MK4 lateral">
+     <defs>
+      <linearGradient id="bodylight" x1="0" y1="0" x2=".3" y2="1">
+       <stop stop-color="#f3f4db" stop-opacity=".45"/>
+       <stop offset=".45" stop-color="#fff" stop-opacity="0"/>
+       <stop offset="1" stop-color="#142017" stop-opacity=".5"/>
+      </linearGradient>
+     </defs>
+     <ellipse cx="400" cy="345" rx="315" ry="22" fill="#000" opacity=".7"/>
+     <!-- Ruedas traseras y delanteras -->
+     <g id="sidewheels">
+      <g transform="translate(242 302)">
+       <circle class="rubber" r="63"/>
+       <circle class="rim" r="43"/>
+       <circle fill="#6d5237" r="34"/>
+       <g class="spoke">
+        <path d="M0-39V39M-39 0H39M-28-28L28 28M28-28L-28 28M-15-36L15 36M15-36L-15 36"/>
+       </g><circle r="10" fill="#e0bf91"/>
+      </g>
+      <g transform="translate(590 302)">
+       <circle class="rubber" r="61"/>
+       <circle class="rim" r="42"/>
+       <circle fill="#6d5237" r="33"/>
+       <g class="spoke">
+        <path d="M0-38V38M-38 0H38M-27-27L27 27M27-27L-27 27M-14-35L14 35M14-35L-14 35"/>
+       </g><circle r="10" fill="#e0bf91"/>
+      </g>
+     </g>
+     <!-- Silueta realista estilizada del cupé -->
+     <path class="paint" d="M66 278
+      L78 259 105 247 170 230 235 209
+      Q266 164 316 150
+      Q341 143 391 145 L455 151
+      Q495 159 532 211 L572 228
+      L640 245 689 271 711 294
+      L699 308 650 315 631 284
+      Q617 242 590 242 Q551 241 535 288
+      L302 291 Q289 241 242 240
+      Q197 241 181 290 L105 304 77 299Z"/>
+     <!-- Guardabarros anchos -->
+     <path d="M178 300Q188 232 242 232Q291 232 305 300" fill="none" stroke="#e1e6d4" stroke-width="5"/>
+     <path d="M532 297Q543 233 590 233Q638 233 649 297" fill="none" stroke="#e1e6d4" stroke-width="5"/>
+     <path d="M185 300Q197 247 242 247Q281 247 296 300M540 296Q551 248 590 248Q628 248 642 296" fill="none" stroke="#63745e" stroke-width="2"/>
+     <!-- Cabina: parabrisas, techo, ventanas -->
+     <path class="paint" d="M233 211L266 168Q286 146 324 146L422 149Q473 155 516 211L485 218 260 218Z"/>
+     <path class="glass" d="M273 169Q291 153 324 153L350 154 335 203 249 203Z"/>
+     <path class="glass" d="M360 154L421 157Q460 163 488 203L345 203Z"/>
+     <path class="glass" d="M432 158Q465 166 483 199L447 199 421 157Z"/>
+     <path d="M356 155L342 203M248 207L493 207" class="shine"/>
+     <!-- Capó largo con ventilaciones -->
+     <path class="paint" d="M83 260L169 235 233 215 261 215 247 236 166 258 111 276 85 279Z"/>
+     <path class="shine" d="M105 255L191 232 233 219"/>
+     <path class="dark" d="M151 237L180 229 171 242 143 250Z"/>
+     <path class="dark" d="M191 223L217 216 209 230 183 237Z"/>
+     <!-- Paneles laterales y manijas -->
+     <path d="M272 219L266 271 369 271 378 218M389 218L383 271 489 270 480 217" fill="none" stroke="#65765f" stroke-width="2"/>
+     <path d="M294 230L322 230M410 229L438 229" class="shine"/>
+     <path class="dark" d="M507 234L532 236 524 269 502 270Z"/>
+     <path d="M509 242H526M507 251H524M505 260H522" class="shine"/>
+     <!-- Espejo -->
+     <path class="paint" d="M260 197L246 187 233 192 238 203 260 205Z"/>
+     <!-- Frontal y faro delantero -->
+     <path class="dark" d="M77 263L113 253 130 261 104 277 82 278Z"/>
+     <path class="paint" d="M69 279L107 277 119 287 108 300 77 298Z"/>
+     <path fill="#e8e9d6" stroke="#899487" stroke-width="2" d="M87 261L116 255 124 261 104 270 84 271Z"/>
+     <path class="dark" d="M83 285L111 286 117 295 83 294Z"/>
+     <!-- Cola trasera y luces -->
+     <path class="paint" d="M648 246L689 267 711 294 699 308 670 308 678 287Z"/>
+     <path fill="#d23a3d" stroke="#6d2728" stroke-width="2" d="M665 262L689 274 698 286 677 280Z"/>
+     <!-- Faldón y splitter -->
+     <path class="dark" d="M299 284L535 284 526 305 301 305Z"/>
+     <path d="M108 300L182 304M302 304L532 304M648 303L696 299" fill="none" stroke="#b7c4b0" stroke-width="3"/>
+     <!-- Alerón alto tipo GT -->
+     <g id="wing-side">
+      <path class="dark" d="M627 205L630 244 639 244 641 204ZM676 207L680 252 689 254 687 211Z"/>
+      <path class="paint" d="M613 201Q656 190 699 207L697 217Q655 205 615 215Z"/>
+      <path class="shine" d="M620 204Q658 195 690 208"/>
+     </g>
+     <!-- Brillos de carrocería -->
+     <path class="shine" d="M270 212L453 212M267 219L251 235M494 216L562 237M115 272L166 258"/>
+     <path d="M105 311L680 311" stroke="#b6c5ad" stroke-opacity=".5" stroke-width="2"/>
+     <text x="400" y="386" fill="#9eac9d" text-anchor="middle" font-size="12" letter-spacing="4">A80 · WIDE BODY / SIDE PROFILE</text>
+    </svg>
+
+    <!-- VISTA DELANTERA -->
+    <svg id="v-front" viewBox="0 0 800 430" style="display:none" aria-label="Supra MK4 frente">
+     <ellipse cx="400" cy="348" rx="260" ry="22" fill="#000" opacity=".7"/>
+     <!-- espejos -->
+     <path class="paint" d="M234 195L182 172 159 181 188 209 237 214ZM566 195L618 172 641 181 612 209 563 214Z"/>
+     <!-- carrocería principal -->
+     <path class="paint" d="M117 279L132 231 184 203 251 181 304 168 496 168 549 181 616 203 668 231 683 279 663 313 591 328 209 328 137 313Z"/>
+     <!-- parabrisas -->
+     <path class="glass" d="M251 183L301 142 499 142 549 183 571 222 229 222Z"/>
+     <path d="M302 147L281 218M498 147L519 218M265 184L535 184" class="shine"/>
+     <!-- capó -->
+     <path class="paint" d="M183 218L239 198 561 198 617 218 644 261 156 261Z"/>
+     <path class="shine" d="M239 207L560 207M202 229L598 229"/>
+     <!-- tomas capó -->
+     <path class="dark" d="M286 201L333 200 325 215 279 216ZM467 200L514 201 521 216 475 215Z"/>
+     <!-- pasos de rueda -->
+     <path d="M125 285Q140 224 201 224Q257 224 269 285M531 285Q543 224 599 224Q660 224 675 285" fill="none" stroke="#e1e6d4" stroke-width="5"/>
+     <!-- faros dobles en carcasas ovaladas -->
+     <path class="dark" d="M132 238Q158 207 215 216L250 238 237 259 153 260Z"/>
+     <path class="dark" d="M668 238Q642 207 585 216L550 238 563 259 647 260Z"/>
+     <path fill="#e8e9d8" stroke="#aab6a6" stroke-width="2" d="M149 237Q174 219 214 225L232 239 222 251 154 251Z"/>
+     <path fill="#e8e9d8" stroke="#aab6a6" stroke-width="2" d="M651 237Q626 219 586 225L568 239 578 251 646 251Z"/>
+     <g fill="#bfcbb8" stroke="#657260" stroke-width="2">
+      <circle cx="174" cy="237" r="10"/><circle cx="198" cy="237" r="10"/><circle cx="218" cy="241" r="6"/>
+      <circle cx="626" cy="237" r="10"/><circle cx="602" cy="237" r="10"/><circle cx="582" cy="241" r="6"/>
+     </g>
+     <!-- paragolpes agresivo -->
+     <path class="paint" d="M130 260L201 270 239 292 561 292 599 270 670 260 654 313 592 328 208 328 146 313Z"/>
+     <!-- gran boca central -->
+     <path class="dark" d="M236 267L564 267 538 310 262 310Z"/>
+     <path fill="#939e95" stroke="#dce3d8" stroke-width="3" d="M286 272L514 272 502 302 298 302Z"/>
+     <g stroke="#374239" stroke-width="2">
+      <path d="M294 279H506M291 286H509M289 293H504M315 274V301M339 274V301M363 274V301M387 274V301M411 274V301M435 274V301M459 274V301M483 274V301"/>
+     </g>
+     <!-- tomas laterales -->
+     <path class="dark" d="M157 270L213 279 203 306 157 298ZM643 270L587 279 597 306 643 298Z"/>
+     <path class="light" d="M172 270L207 276 200 284 170 281Z"/>
+     <path class="light" d="M628 270L593 276 600 284 630 281Z"/>
+     <!-- splitter delantero -->
+     <path class="dark" d="M142 312L237 322 563 322 658 312 678 331 553 341 247 341 122 331Z"/>
+     <path d="M132 331H668" stroke="#aab9a6" stroke-width="3"/>
+     <!-- ruedas anchas -->
+     <g>
+      <ellipse class="rubber" cx="180" cy="313" rx="31" ry="44"/>
+      <ellipse class="rim" cx="180" cy="313" rx="19" ry="30"/>
+      <path class="spoke" d="M180 286V340M165 299L195 327M165 327L195 299"/>
+      <ellipse class="rubber" cx="620" cy="313" rx="31" ry="44"/>
+      <ellipse class="rim" cx="620" cy="313" rx="19" ry="30"/>
+      <path class="spoke" d="M620 286V340M605 299L635 327M605 327L635 299"/>
+     </g>
+     <text x="400" y="389" fill="#9eac9d" text-anchor="middle" font-size="12" letter-spacing="4">FRONT / TWIN HEADLIGHTS</text>
+    </svg>
+
+    <!-- VISTA TRASERA -->
+    <svg id="v-rear" viewBox="0 0 800 430" style="display:none" aria-label="Supra MK4 trasera">
+     <ellipse cx="400" cy="346" rx="260" ry="22" fill="#000" opacity=".7"/>
+     <!-- soportes y alerón -->
+     <g id="wing-rear">
+      <path class="dark" d="M215 123L231 212 248 212 241 123ZM559 123L552 212 569 212 585 123Z"/>
+      <path class="paint" d="M174 116Q400 83 626 116L622 136Q400 108 178 136Z"/>
+      <path class="shine" d="M192 118Q400 94 610 118"/>
+     </g>
+     <!-- cuerpo trasero -->
+     <path class="paint" d="M130 207L179 180 253 165 547 165 621 180 670 207 688 269 665 313 592 329 208 329 135 313 112 269Z"/>
+     <!-- cristal trasero -->
+     <path class="glass" d="M246 169L554 169 589 205 211 205Z"/>
+     <path d="M400 171V203M263 172L247 201M537 172L553 201" class="shine"/>
+     <!-- tapa maletero -->
+     <path class="paint" d="M199 207L601 207 635 239 165 239Z"/>
+     <path class="shine" d="M219 213H581"/>
+     <!-- panel de luces traseras -->
+     <path class="dark" d="M156 224L644 224 634 263 166 263Z"/>
+     <g>
+      <ellipse fill="#c73538" stroke="#72292a" stroke-width="3" cx="237" cy="242" rx="26" ry="16"/>
+      <ellipse fill="#f06561" cx="237" cy="242" rx="16" ry="10"/>
+      <ellipse fill="#c73538" stroke="#72292a" stroke-width="3" cx="294" cy="242" rx="26" ry="16"/>
+      <ellipse fill="#f06561" cx="294" cy="242" rx="16" ry="10"/>
+      <ellipse fill="#c73538" stroke="#72292a" stroke-width="3" cx="506" cy="242" rx="26" ry="16"/>
+      <ellipse fill="#f06561" cx="506" cy="242" rx="16" ry="10"/>
+      <ellipse fill="#c73538" stroke="#72292a" stroke-width="3" cx="563" cy="242" rx="26" ry="16"/>
+      <ellipse fill="#f06561" cx="563" cy="242" rx="16" ry="10"/>
+     </g>
+     <!-- placa -->
+     <rect x="352" y="258" width="96" height="40" rx="3" fill="#e5e8db" stroke="#8b9686" stroke-width="2"/>
+     <rect x="362" y="267" width="76" height="22" fill="#f9f8ed"/>
+     <!-- paragolpes trasero -->
+     <path class="paint" d="M134 266L198 279 602 279 666 266 650 311 591 329 209 329 150 311Z"/>
+     <!-- difusor -->
+     <path class="dark" d="M222 310L578 310 544 345 256 345Z"/>
+     <path d="M286 314L301 341M345 314L352 344M455 314L448 344M514 314L499 341" stroke="#778475" stroke-width="4"/>
+     <!-- escapes -->
+     <ellipse cx="178" cy="308" rx="20" ry="12" fill="#a8b2a8" stroke="#4a5549" stroke-width="4"/>
+     <ellipse cx="622" cy="308" rx="20" ry="12" fill="#a8b2a8" stroke="#4a5549" stroke-width="4"/>
+     <!-- ruedas -->
+     <path d="M137 285Q152 231 210 231Q264 231 275 285M525 285Q536 231 590 231Q648 231 663 285" fill="none" stroke="#e1e6d4" stroke-width="5"/>
+     <ellipse class="rubber" cx="207" cy="310" rx="29" ry="42"/>
+     <ellipse class="rim" cx="207" cy="310" rx="18" ry="29"/>
+     <path class="spoke" d="M207 284V336M192 296L222 324M192 324L222 296"/>
+     <ellipse class="rubber" cx="593" cy="310" rx="29" ry="42"/>
+     <ellipse class="rim" cx="593" cy="310" rx="18" ry="29"/>
+     <path class="spoke" d="M593 284V336M578 296L608 324M578 324L608 296"/>
+     <text x="400" y="389" fill="#9eac9d" text-anchor="middle" font-size="12" letter-spacing="4">REAR / GT WING & DIFFUSER</text>
+    </svg>
+
+    <!-- VISTA DEL MOTOR -->
+    <svg id="v-engine" viewBox="0 0 800 430" style="display:none" aria-label="Motor 2JZ-GTE">
+     <text x="60" y="42" fill="#d8ff72" font-size="12" letter-spacing="3">2JZ-GTE / INLINE SIX</text>
+     <text x="60" y="62" fill="#9ba99a" font-size="11" letter-spacing="2">ENGINE BAY CONCEPT</text>
+     <path d="M105 95H695L735 320H65Z" fill="#222a23" stroke="#879483" stroke-width="4"/>
+     <path d="M128 112H672L704 295H96Z" fill="#101612" stroke="#4e5a4e" stroke-width="3"/>
+     <!-- torretas -->
+     <ellipse cx="174" cy="152" rx="45" ry="33" fill="#475348" stroke="#a9b6a4" stroke-width="3"/>
+     <ellipse cx="626" cy="152" rx="45" ry="33" fill="#475348" stroke="#a9b6a4" stroke-width="3"/>
+     <ellipse cx="174" cy="152" rx="20" ry="15" fill="#121713" stroke="#d0d9ca" stroke-width="3"/>
+     <ellipse cx="626" cy="152" rx="20" ry="15" fill="#121713" stroke="#d0d9ca" stroke-width="3"/>
+     <!-- bloque longitudinal -->
+     <path fill="#64766a" stroke="#c1ccb9" stroke-width="3" d="M308 105L492 105 514 145 499 277 301 277 286 145Z"/>
+     <path fill="#35463a" stroke="#a7b7a5" stroke-width="3" d="M329 124L471 124 483 154 473 250 327 250 317 154Z"/>
+     <rect x="342" y="135" width="116" height="23" rx="3" fill="#151c17"/>
+     <text x="400" y="151" text-anchor="middle" font-size="13" fill="#e4e9dc" font-weight="bold">2JZ-GTE</text>
+     <g stroke="#c2cdbd" stroke-width="3">
+      <path d="M326 174H474M324 190H476M323 206H475M322 222H474M324 238H472"/>
+     </g>
+     <!-- turbos -->
+     <circle cx="249" cy="190" r="35" fill="#909c92" stroke="#e2e7db" stroke-width="3"/>
+     <circle cx="249" cy="190" r="22" fill="#333d35" stroke="#d5ddd0" stroke-width="3"/>
+     <circle cx="249" cy="190" r="8" fill="#c9d2c5"/>
+     <circle cx="552" cy="185" r="32" fill="#909c92" stroke="#e2e7db" stroke-width="3"/>
+     <circle cx="552" cy="185" r="19" fill="#333d35" stroke="#d5ddd0" stroke-width="3"/>
+     <circle cx="552" cy="185" r="7" fill="#c9d2c5"/>
+     <!-- tuberías -->
+     <path d="M276 207L299 220 310 246 332 246" fill="none" stroke="#d3dbcf" stroke-width="16" stroke-linejoin="round"/>
+     <path d="M276 207L299 220 310 246 332 246" fill="none" stroke="#57675a" stroke-width="9" stroke-linejoin="round"/>
+     <path d="M521 201L503 220 490 240 472 240" fill="none" stroke="#d3dbcf" stroke-width="16" stroke-linejoin="round"/>
+     <path d="M521 201L503 220 490 240 472 240" fill="none" stroke="#57675a" stroke-width="9" stroke-linejoin="round"/>
+     <!-- batería -->
+     <rect x="578" y="230" width="79" height="48" rx="4" fill="#303931" stroke="#a1ad9b" stroke-width="3"/>
+     <rect x="588" y="239" width="59" height="15" fill="#111612"/>
+     <path d="M592 264H642" stroke="#c4cec0" stroke-width="3"/>
+     <!-- depósito -->
+     <rect x="139" y="225" width="54" height="54" rx="8" fill="#879486" stroke="#d7ded1" stroke-width="3"/>
+     <path d="M148 239H184M148 249H184" stroke="#465347" stroke-width="3"/>
+     <!-- intercooler delantero -->
+     <path d="M236 278H564L538 330H262Z" fill="#87968b" stroke="#d5ded1" stroke-width="4"/>
+     <g stroke="#344036" stroke-width="3">
+      <path d="M253 288H547M249 298H543M245 308H539M241 318H535"/>
+      <path d="M275 283L272 326M300 283L297 326M325 283L322 326M350 283L347 326M375 283L372 326M400 283V326M425 283L428 326M450 283L453 326M475 283L478 326M500 283L503 326M525 283L528 326"/>
+     </g>
+     <text x="400" y="374" text-anchor="middle" fill="#d8ff72" font-size="12" letter-spacing="3">TURBOCHARGED INLINE SIX</text>
+     <text x="400" y="393" text-anchor="middle" fill="#9ba99a" font-size="10" letter-spacing="2">ILLUSTRATED ENGINE BAY</text>
+    </svg>
+   </div>
+  </div>
+
+  <div class="tabs">
+   <button class="active" onclick="view('side',0,this)">Lateral</button>
+   <button onclick="view('front',1,this)">Frente</button>
+   <button onclick="view('rear',2,this)">Atrás</button>
+   <button onclick="view('engine',3,this)">Motor</button>
+  </div>
+ </section>
+
+ <aside class="panel">
+  <div class="kicker">CUSTOM BUILD · A80</div>
+  <h2>COLOR DE CARROCERÍA</h2>
+  <div class="colors">
+   <button class="swatch active" style="background:#aabca0" aria-label="Verde" onclick="colorPaint('#aabca0',this)"></button>
+   <button class="swatch" style="background:#b82c35" aria-label="Rojo" onclick="colorPaint('#b82c35',this)"></button>
+   <button class="swatch" style="background:#111416" aria-label="Negro" onclick="colorPaint('#111416',this)"></button>
+   <button class="swatch" style="background:#e7e6de" aria-label="Blanco" onclick="colorPaint('#e7e6de',this)"></button>
+   <button class="swatch" style="background:#31599c" aria-label="Azul" onclick="colorPaint('#31599c',this)"></button>
+   <button class="swatch" style="background:#d2b947" aria-label="Amarillo" onclick="colorPaint('#d2b947',this)"></button>
+  </div>
+  <h2>RINES</h2>
+  <div class="colors">
+   <button class="swatch active" style="background:#b78350" aria-label="Bronce" onclick="colorRim('#b78350',this)"></button>
+   <button class="swatch" style="background:#c7cbd0" aria-label="Plata" onclick="colorRim('#c7cbd0',this)"></button>
+   <button class="swatch" style="background:#191c1a" aria-label="Negro" onclick="colorRim('#191c1a',this)"></button>
+  </div>
+  <h2>CONTROLES</h2>
+  <div class="controls">
+   <button id="wingbutton" class="active" onclick="wingToggle()">Alerón: sí</button>
+   <button id="lampbutton" onclick="lampToggle()">Faros</button>
+   <button id="rotatebutton" onclick="rotateToggle()">Giro visual</button>
+   <button onclick="resetView()">Vista inicial</button>
+  </div>
+  <h2>ESPECIFICACIONES</h2>
+  <div class="specs">
+   <div class="spec"><b>2JZ-GTE</b><small>MOTOR TURBO L6</small></div>
+   <div class="spec"><b>3.0 L</b><small>CILINDRADA</small></div>
+   <div class="spec"><b>RWD</b><small>TRACCIÓN TRASERA</small></div>
+   <div class="spec"><b>A80</b><small>SUPRA MK4</small></div>
+  </div>
+  <div id="status">● Personaliza tu Supra</div>
+  <p class="note">Modelo gráfico ilustrado inspirado en tu referencia. No es un modelo CAD ni una reproducción 3D exacta.</p>
+ </aside>
+ </div>
+</main>
+<footer>VÉRTICE GARAGE · BUILT AROUND THE LEGEND</footer>
+<script>
+const ids=['side','front','rear','engine'];
+function view(name,n,button){
+ ids.forEach(id=>document.getElementById('v-'+id).style.display=id===name?'block':'none');
+ document.getElementById('counter').textContent='0'+(n+1)+' / 04';
+ document.querySelectorAll('.tabs button').forEach(b=>b.classList.remove('active'));
+ button.classList.add('active');
+ document.getElementById('status').textContent='● Vista: '+name.toUpperCase();
+}
+function colorPaint(c,b){
+ document.documentElement.style.setProperty('--paint',c);
+ document.querySelectorAll('.colors:first-of-type .swatch').forEach(x=>x.classList.remove('active'));
+ b.classList.add('active');
+ document.getElementById('status').textContent='● Color actualizado';
+}
+function colorRim(c,b){
+ document.documentElement.style.setProperty('--rim',c);
+ b.parentElement.querySelectorAll('button').forEach(x=>x.classList.remove('active'));
+ b.classList.add('active');
+ document.getElementById('status').textContent='● Rines actualizados';
+}
+let wing=true,lamps=false,rot=false;
+function wingToggle(){
+ wing=!wing;
+ ['wing-side','wing-rear'].forEach(id=>document.getElementById(id).style.display=wing?'':'none');
+ document.getElementById('wingbutton').textContent='Alerón: '+(wing?'sí':'no');
+ document.getElementById('wingbutton').classList.toggle('active',wing);
+}
+function lampToggle(){
+ lamps=!lamps;
+ document.querySelectorAll('#v-front .light,#v-front path[fill="#e8e9d8"]').forEach(x=>{
+  x.style.filter=lamps?'drop-shadow(0 0 10px #fff8ce)':'none';
+ });
+ document.getElementById('lampbutton').textContent=lamps?'Apagar faros':'Faros';
+ document.getElementById('lampbutton').classList.toggle('active',lamps);
+}
+function rotateToggle(){
+ rot=!rot;
+ document.querySelectorAll('.stage svg').forEach(x=>{
+  x.style.transition='transform .6s ease';
+  x.style.transform=rot?'perspective(700px) rotateY(5deg)':'none';
+ });
+ document.getElementById('rotatebutton').classList.toggle('active',rot);
+}
+function resetView(){
+ rot=false;
+ document.querySelectorAll('.stage svg').forEach(x=>x.style.transform='none');
+ view('side',0,document.querySelector('.tabs button'));
+ document.getElementById('rotatebutton').classList.remove('active');
+}
+</script>
+</body>
+</html>
